@@ -11,7 +11,10 @@ primeList highestNum =
 runSieve :: [Int] -> [Int]
 --run the sieve on the list we have so far
 runSieve [] = []
-runSieve (x:xs) = x:(runSieve $ filter (\y -> y `mod` x /= 0) xs)
+runSieve (x:xs) 
+    | length xs == 0                  = [x]
+    | (fromIntegral x) > sqrt (fromIntegral (last xs)) = x:xs
+    | otherwise = x:(runSieve $ filter (\y -> y `mod` x /= 0) xs)
 
 isPrime :: Int -> Bool
 isPrime num
